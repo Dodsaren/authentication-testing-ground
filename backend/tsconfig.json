@@ -1,0 +1,17 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "typeRoots": ["./node_modules/@types"],
+    "paths": {
+      "@services/*": ["./src/services/*"],
+      "@features/*": ["./src/features/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@app/*": ["./index.ts"]
+    }
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}

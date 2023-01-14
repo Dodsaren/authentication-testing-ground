@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int             @id @default(autoincrement())
+  username       String          @unique @db.VarChar(255)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  password       Password?
+  authenticators Authenticator[]
+
+  @@map("users")
+}
+
+model Password {
+  id        Int      @id @default(autoincrement())
+  hash      String   @db.VarChar(1024)
+  salt      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("passwords")
+}
+
+model Authenticator {
+  credentialId         String   @id
+  credentialPublicKey  Bytes
+  counter              BigInt
+  credentialDeviceType String   @db.VarChar(32)
+  credentialBackedUp   Boolean
+  transports           String?  @db.VarChar(255)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  userId               Int
+  user                 User     @relation(fields: [userId], references: [id])
+
+  @@map("authenticators")
+}
