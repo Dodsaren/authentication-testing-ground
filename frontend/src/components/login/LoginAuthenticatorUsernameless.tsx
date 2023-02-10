@@ -56,7 +56,7 @@ export const LoginAuthenticatorUsernameless = () => {
   }
   return (
     <div>
-      <h2 className='text-2xl font-bold underline'>authenticator</h2>
+      <h2 className='mb-5 text-2xl font-bold'>authenticator usernameless</h2>
       <Button onClick={onLoginClick}>
         <FingerPrintIcon />
         login

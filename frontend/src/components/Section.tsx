@@ -5,5 +5,7 @@ type Props = {
 }
 
 export const Section = ({ children }: Props) => {
-  return <section className='my-2 border bg-slate-50 p-2'>{children}</section>
+  return (
+    <section className='my-2 rounded-lg bg-white shadow'>{children}</section>
+  )
 }

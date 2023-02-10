@@ -1,4 +1,13 @@
-import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import S from './style.module.css'
 
 const letters =
@@ -9,13 +18,24 @@ const letters =
 const computerText =
   'authentication in progress please hold on and surrender your bases'
 
-export const PopupLoaderContext = createContext()
+type Context = {
+  open: boolean
+  setOpen: Dispatch<SetStateAction<boolean>>
+}
+export const PopupLoaderContext = createContext<Context | null>(null)
 
 export const usePopupLoader = () => {
-  return useContext(PopupLoaderContext)
+  const ctx = useContext(PopupLoaderContext)
+  if (!ctx) {
+    throw new Error('Contaxt cant be null, is provider available')
+  }
+  return ctx
 }
 
-export const PopupLoaderProvider = ({ children }) => {
+type Props = {
+  children: ReactNode
+}
+export const PopupLoaderProvider = ({ children }: Props) => {
   const [open, setOpen] = useState(false)
 
   return (

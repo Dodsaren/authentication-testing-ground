@@ -54,19 +54,17 @@ export const LoginAuthenticatorPasswordless = () => {
   }
   return (
     <div>
-      <h2 className='text-2xl font-bold underline'>authenticator</h2>
-      <label>
-        username
-        <TextInput
-          className='mb-5'
-          type='text'
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value)
-          }}
-          autoComplete='webauthn'
-        />
-      </label>
+      <h2 className='mb-5 text-2xl font-bold'>authenticator passwordless</h2>
+      <TextInput
+        className='mb-5'
+        type='text'
+        value={username}
+        label='username'
+        onChange={(e) => {
+          setUsername(e.target.value)
+        }}
+        autoComplete='webauthn'
+      />
       <Button onClick={onLoginClick}>
         <FingerPrintIcon />
         login
